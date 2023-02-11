@@ -1,16 +1,7 @@
-# todo_app
+This is the fourth assignment of Ostad flutter course.
 
-A new Flutter project.
+Here is the requirment of the fourth assignment:
 
-## Getting Started
+--Create a To Do List App using Stateful Widget
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-> I create a to do app which can store todo's and delete it. It's also show the time when the todo added. And show a alert dialog while delete a todo.

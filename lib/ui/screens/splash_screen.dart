@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
 
     return Scaffold(
       body: ScreenBackground(
-        widget: Center(
+        child: Center(
           child: SvgPicture.asset(
             'assets/image/logo.svg',
             fit: BoxFit.scaleDown,

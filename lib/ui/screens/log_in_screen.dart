@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/ui/screens/sign_up.dart';
+import 'package:task_manager/ui/widgets/app_sign_in_out_text.dart';
 import 'package:task_manager/ui/widgets/elevated_button.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
@@ -17,7 +19,7 @@ class _LogInScreenState extends State<LogInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ScreenBackground(
-        widget: Padding(
+        child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,10 +52,8 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
               Center(
                   child: TextButton(
-                    style: TextButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      minimumSize: Size.zero
-                    ),
+                      style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero, minimumSize: Size.zero),
                       onPressed: () {},
                       child: const Text(
                         "Forget Password?",
@@ -62,29 +62,14 @@ class _LogInScreenState extends State<LogInScreen> {
               const SizedBox(
                 height: 5,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Dont't have account? ",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  TextButton(
-
-                    style: TextButton.styleFrom(
-                      minimumSize: Size.zero,
-                      padding: EdgeInsets.zero,
-                    ),
-
-                      onPressed: () {},
-                      child: const Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          color: Colors.green,
-                        ),
-                      ))
-                ],
-              )
+              SignInUp(
+                questionString: "Dont't have account? ",
+                signInOut: "Sign Up",
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SignUpScreen()));
+                },
+              ),
             ],
           ),
         ),

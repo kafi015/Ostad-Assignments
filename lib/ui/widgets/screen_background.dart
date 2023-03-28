@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ScreenBackground extends StatelessWidget {
-  const ScreenBackground({Key? key, required this.widget}) : super(key: key);
+  const ScreenBackground({Key? key, required this.child}) : super(key: key);
 
-  final Widget widget;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class ScreenBackground extends StatelessWidget {
           width: ScreenWidth,
           height: ScreenHeight,
         ),
-        widget,
+        child,
       ],
     );
   }

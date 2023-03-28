@@ -17,6 +17,7 @@ class AppTextField extends StatelessWidget {
       obscuringCharacter: '*',
       decoration: InputDecoration(
           hintText: hintText,
+          hintStyle: const TextStyle(color: Colors.grey),
           fillColor: Colors.white,
           filled: true,
           border: const OutlineInputBorder(borderSide: BorderSide.none)),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:task_manager/ui/screens/log_in_screen.dart';
+import 'package:task_manager/ui/screens/set_password_screen.dart';
 import 'package:task_manager/ui/utils/text_styles.dart';
 import 'package:task_manager/ui/widgets/app_sign_in_out_text.dart';
 import 'package:task_manager/ui/widgets/elevated_button.dart';
@@ -57,29 +58,27 @@ class _OTPVarificationScreenState extends State<OTPVarificationScreen> {
                 animationDuration: const Duration(milliseconds: 300),
                 backgroundColor: Colors.transparent,
                 enableActiveFill: true,
-
-
-                onCompleted: (v) {
-                },
+                onCompleted: (v) {},
                 onChanged: (value) {
-                  setState(() {
-
-                  });
+                  setState(() {});
                 },
                 beforeTextPaste: (text) {
                   //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
                   //but you can show anything you want here, like your pop up saying wrong paste format or etc
                   return true;
-                }, appContext: context,
+                },
+                appContext: context,
               ),
               const SizedBox(
                 height: 24,
               ),
-
               AppElevatedButton(
                   child: const Text("Verify"),
                   onTap: () {
-                   // Navigator.push(context, MaterialPageRoute(builder: (context)=> OTPVarificationScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SetPasswordScreen()));
                   }),
               const SizedBox(
                 height: 24,
@@ -88,7 +87,10 @@ class _OTPVarificationScreenState extends State<OTPVarificationScreen> {
                 questionString: "Have account? ",
                 signInOut: "Sign In",
                 onTap: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const LogInScreen()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LogInScreen()));
                 },
               ),
             ],

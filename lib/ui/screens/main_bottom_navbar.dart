@@ -3,6 +3,7 @@ import 'package:task_manager/ui/screens/Cancel_task_screen.dart';
 import 'package:task_manager/ui/screens/Completed_task_screen.dart';
 import 'package:task_manager/ui/screens/in_progress_task_screen.dart';
 import 'package:task_manager/ui/screens/new_task_screen.dart';
+import 'package:task_manager/ui/widgets/user_profile_widget.dart';
 
 class MainBottonNavbar extends StatefulWidget {
   const MainBottonNavbar({Key? key}) : super(key: key);
@@ -12,7 +13,6 @@ class MainBottonNavbar extends StatefulWidget {
 }
 
 class _MainBottonNavbarState extends State<MainBottonNavbar> {
-
   int currentIndex = 0;
 
   final List<Widget> _screens = [
@@ -25,7 +25,14 @@ class _MainBottonNavbarState extends State<MainBottonNavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[currentIndex],
+      body: SafeArea(
+        child: Column(
+          children: [
+            const UserProfileWidget(),
+            Expanded(child: _screens[currentIndex]),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 4,
         backgroundColor: Colors.white,

@@ -8,11 +8,12 @@ class TaskSingleItem extends StatelessWidget {
     required this.subject,
     required this.description,
     required this.date,
-    required this.type,
+    required this.type, required this.chipColour,
   }) : super(key: key);
 
   final String subject, description, date, type;
   final VoidCallback onEditPress, onDeletePress;
+  final Color chipColour;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,9 @@ class TaskSingleItem extends StatelessWidget {
             Row(
               children: [
                 Chip(
+
                   label: Text(type),
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: chipColour,
                 ),
                 const Spacer(),
                 IconButton(

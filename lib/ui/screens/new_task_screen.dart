@@ -35,8 +35,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
               )),
               Expanded(
                   child: DashBoardItem(
-                numberofTask: 13,
-                typeofTask: "In Progress",
+                numberofTask: 13 ,typeofTask: "In Progress",
               )),
             ],
           ),
@@ -50,7 +49,7 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                 description:
                     "the hmber you call ins not be reachedat the momemnt please try again ater thank you",
                 date: "12/05/23",
-                type: "New");
+                type: "New", chipColour: Colors.blue,);
           })),
         ],
       ),

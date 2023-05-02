@@ -47,7 +47,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 height: 16,
               ),
               AppElevatedButton(
-                  child: Icon(Icons.arrow_circle_right_outlined), onTap: () {}),
+                  child: const Icon(Icons.arrow_circle_right_outlined), onTap: () {}),
               const SizedBox(
                 height: 36,
               ),
@@ -56,7 +56,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       style: TextButton.styleFrom(
                           padding: EdgeInsets.zero, minimumSize: Size.zero),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> VerifyWithEmail()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const VerifyWithEmail()));
                       },
                       child: const Text(
                         "Forget Password?",
@@ -70,7 +70,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 signInOut: "Sign Up",
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SignUpScreen()));
+                      MaterialPageRoute(builder: (context) => const SignUpScreen()));
                 },
               ),
             ],

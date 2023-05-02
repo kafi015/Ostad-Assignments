@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/ui/screens/otp_verification_screen.dart';
+import 'package:task_manager/ui/screens/log_in_screen.dart';
 import 'package:task_manager/ui/utils/text_styles.dart';
 import 'package:task_manager/ui/widgets/app_sign_in_out_text.dart';
-import 'package:task_manager/ui/widgets/app_textfield_widget.dart';
 import 'package:task_manager/ui/widgets/elevated_button.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
-class VerifyWithEmail extends StatefulWidget {
-  const VerifyWithEmail({Key? key}) : super(key: key);
+class OTPVarificationScreen extends StatefulWidget {
+  const OTPVarificationScreen({Key? key}) : super(key: key);
 
   @override
-  State<VerifyWithEmail> createState() => _VerifyWithEmailState();
+  State<OTPVarificationScreen> createState() => _OTPVarificationScreenState();
 }
 
-class _VerifyWithEmailState extends State<VerifyWithEmail> {
+class _OTPVarificationScreenState extends State<OTPVarificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +24,7 @@ class _VerifyWithEmailState extends State<VerifyWithEmail> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Your Email Address",
+                "PIN Verification",
                 style: ScreenTitleTextStyle,
               ),
               const SizedBox(
@@ -38,17 +37,17 @@ class _VerifyWithEmailState extends State<VerifyWithEmail> {
               const SizedBox(
                 height: 24,
               ),
-              AppTextField(
-                hintText: "Email",
-                controller: TextEditingController(),
-              ),
+              // AppTextField(
+              //   hintText: "Email",
+              //   controller: TextEditingController(),
+              // ),
               const SizedBox(
                 height: 24,
               ),
               AppElevatedButton(
-                  child: const Icon(Icons.arrow_circle_right_outlined),
+                  child: const Text("Verify"),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const OTPVarificationScreen()));
+                   // Navigator.push(context, MaterialPageRoute(builder: (context)=> OTPVarificationScreen()));
                   }),
               const SizedBox(
                 height: 24,
@@ -57,7 +56,7 @@ class _VerifyWithEmailState extends State<VerifyWithEmail> {
                 questionString: "Have account? ",
                 signInOut: "Sign In",
                 onTap: () {
-                  Navigator.pop(context);
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const LogInScreen()));
                 },
               ),
             ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/ui/screens/Cancel_task_screen.dart';
 import 'package:task_manager/ui/screens/Completed_task_screen.dart';
+import 'package:task_manager/ui/screens/add_new_task.dart';
 import 'package:task_manager/ui/screens/in_progress_task_screen.dart';
 import 'package:task_manager/ui/screens/new_task_screen.dart';
 import 'package:task_manager/ui/widgets/user_profile_widget.dart';
@@ -56,6 +57,16 @@ class _MainBottonNavbarState extends State<MainBottonNavbar> {
               icon: Icon(Icons.incomplete_circle), label: "Progress"),
         ],
       ),
+
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> const AddNewTask()));
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.add),
+      ),
+
     );
   }
 }

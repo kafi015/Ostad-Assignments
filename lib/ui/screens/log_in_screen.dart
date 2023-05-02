@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/ui/screens/main_bottom_navbar.dart';
 import 'package:task_manager/ui/screens/sign_up.dart';
 import 'package:task_manager/ui/screens/verify_with_email.dart';
 import 'package:task_manager/ui/widgets/app_sign_in_out_text.dart';
@@ -47,7 +48,14 @@ class _LogInScreenState extends State<LogInScreen> {
                 height: 16,
               ),
               AppElevatedButton(
-                  child: const Icon(Icons.arrow_circle_right_outlined), onTap: () {}),
+                  child: const Icon(Icons.arrow_circle_right_outlined),
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MainBottonNavbar()),
+                        (route) => false);
+                  }),
               const SizedBox(
                 height: 36,
               ),
@@ -56,7 +64,10 @@ class _LogInScreenState extends State<LogInScreen> {
                       style: TextButton.styleFrom(
                           padding: EdgeInsets.zero, minimumSize: Size.zero),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const VerifyWithEmail()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const VerifyWithEmail()));
                       },
                       child: const Text(
                         "Forget Password?",
@@ -69,8 +80,10 @@ class _LogInScreenState extends State<LogInScreen> {
                 questionString: "Dont't have account? ",
                 signInOut: "Sign Up",
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const SignUpScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpScreen()));
                 },
               ),
             ],

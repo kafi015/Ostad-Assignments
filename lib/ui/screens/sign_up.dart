@@ -23,6 +23,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

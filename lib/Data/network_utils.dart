@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:http/http.dart' as http;
 
@@ -18,7 +19,7 @@ class NetworkUtils {
     }
   }
 
-   Future<dynamic> postMethod(String url, {Map<String, String>? body}) async {
+   Future<dynamic> postMethod(String url, {Map<String, String>? body , VoidCallback? onunauthorized}) async {
     try {
       final http.Response response = await http.post(Uri.parse(url),
           headers: {"Content-Type": "application/json"},
@@ -26,7 +27,9 @@ class NetworkUtils {
       if (response.statusCode == 200) {
         return jsonDecode(response.body);
       } else if (response.statusCode == 401) {
-        print("Unauthorized");
+        if(onunauthorized != null) {
+          onunauthorized();
+        }
       } else {
         print("Something went wrong");
       }

@@ -7,6 +7,8 @@ import 'package:task_manager/ui/widgets/app_textfield_widget.dart';
 import 'package:task_manager/ui/widgets/elevated_button.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
+import '../../Data/urls.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
@@ -120,7 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onTap: () async {
                           if (_formKey.currentState!.validate()) {
                             final result = await NetworkUtils().postMethod(
-                                'https://task.teamrabbil.com/api/v1/registration',
+                                Urls.registrationUrl,
                                 body: {
                                   'email': emailETcontroller.text.trim(),
                                   'mobile': mobileETcontroller.text.trim(),

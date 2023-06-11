@@ -27,110 +27,117 @@ class _LogInScreenState extends State<LogInScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ScreenBackground(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Get Started With",
-                  style: ScreenTitleTextStyle,
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                AppTextField(
-                  hintText: 'Email',
-                  controller: emailController,
-                  validator: (value) {
-                    if (value?.isEmpty ?? true) {
-                      return "Enter your email";
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                AppTextField(
-                  hintText: 'Pasword',
-                  controller: passController,
-                  validator: (value) {
-                    if ((value?.isEmpty ?? true) &&
-                        ((value?.length ?? 0) < 6)) {
-                      return "Enter password more than 6 letter";
-                    }
-                    return null;
-                  },
-                  obscureText: true,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                AppElevatedButton(
-                    child: const Icon(Icons.arrow_circle_right_outlined),
-                    onTap: () async {
-                      if (_formKey.currentState!.validate()) {
-                        final response =
-                            await NetworkUtils().postMethod(Urls.loginUrl,
-                            body: {
-                              'email' : emailController.text.trim(),
-                              'password' : passController.text,
-                            },
-                              onunauthorized: (){
-                                showSnackBarMessage(context, 'Email or Password incorrect', true);
-                              }
-
-                            );
-
-                        if (response != null &&
-                            response['status'] == 'success') {
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const MainBottonNavbar()),
-                              (route) => false);
+    return SafeArea(
+      child: Scaffold(
+        body: ScreenBackground(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 100,
+                    ),
+                    Text(
+                      "Get Started With",
+                      style: ScreenTitleTextStyle,
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    AppTextField(
+                      hintText: 'Email',
+                      controller: emailController,
+                      validator: (value) {
+                        if (value?.isEmpty ?? true) {
+                          return "Enter your email";
                         }
-                      }
-                    }),
-                const SizedBox(
-                  height: 36,
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    AppTextField(
+                      hintText: 'Pasword',
+                      controller: passController,
+                      validator: (value) {
+                        if ((value?.isEmpty ?? true) &&
+                            ((value?.length ?? 0) < 6)) {
+                          return "Enter password more than 6 letter";
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    AppElevatedButton(
+                        child: const Icon(Icons.arrow_circle_right_outlined),
+                        onTap: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final response =
+                                await NetworkUtils().postMethod(Urls.loginUrl,
+                                body: {
+                                  'email' : emailController.text.trim(),
+                                  'password' : passController.text,
+                                },
+                                  onunauthorized: (){
+                                    showSnackBarMessage(context, 'Email or Password incorrect', true);
+                                  }
+
+                                );
+
+                            if (response != null &&
+                                response['status'] == 'success') {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MainBottonNavbar()),
+                                  (route) => false);
+                            }
+                          }
+                        }),
+                    const SizedBox(
+                      height: 36,
+                    ),
+                    Center(
+                        child: TextButton(
+                            style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero, minimumSize: Size.zero),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const VerifyWithEmail()));
+                            },
+                            child: const Text(
+                              "Forget Password?",
+                              style: TextStyle(color: Colors.grey),
+                            ))),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    SignInUp(
+                      questionString: "Dont't have account? ",
+                      signInOut: "Sign Up",
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpScreen()));
+                      },
+                    ),
+                  ],
                 ),
-                Center(
-                    child: TextButton(
-                        style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero, minimumSize: Size.zero),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const VerifyWithEmail()));
-                        },
-                        child: const Text(
-                          "Forget Password?",
-                          style: TextStyle(color: Colors.grey),
-                        ))),
-                const SizedBox(
-                  height: 5,
-                ),
-                SignInUp(
-                  questionString: "Dont't have account? ",
-                  signInOut: "Sign Up",
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SignUpScreen()));
-                  },
-                ),
-              ],
+              ),
             ),
           ),
         ),

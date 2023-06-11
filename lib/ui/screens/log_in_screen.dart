@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/Data/auth_utils.dart';
 import 'package:task_manager/Data/network_utils.dart';
 import 'package:task_manager/ui/screens/main_bottom_navbar.dart';
 import 'package:task_manager/ui/screens/sign_up.dart';
@@ -25,6 +26,37 @@ class _LogInScreenState extends State<LogInScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool inProgress = false;
+
+  Future<void> logIn() async {
+    inProgress = true;
+    setState(() {});
+    final response = await NetworkUtils().postMethod(Urls.loginUrl, body: {
+      'email': emailController.text.trim(),
+      'password': passController.text,
+    }, onunauthorized: () {
+      showSnackBarMessage(context, 'Email or Password incorrect', true);
+    });
+    inProgress = false;
+    setState(() {});
+
+    if (response != null && response['status'] == 'success') {
+      AuthUtils.saveUserData(
+          response['data']['firstName'],
+          response['data']['lastName'],
+          response['token'],
+          response['data']['photo'],
+          response['data']['mobile'],
+          response['data']['email']
+      );
+
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const MainBottonNavbar()),
+          (route) => false);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,7 +71,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 100,
                     ),
                     Text(
@@ -77,40 +109,28 @@ class _LogInScreenState extends State<LogInScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    AppElevatedButton(
-                        child: const Icon(Icons.arrow_circle_right_outlined),
-                        onTap: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final response =
-                                await NetworkUtils().postMethod(Urls.loginUrl,
-                                body: {
-                                  'email' : emailController.text.trim(),
-                                  'password' : passController.text,
-                                },
-                                  onunauthorized: (){
-                                    showSnackBarMessage(context, 'Email or Password incorrect', true);
-                                  }
-
-                                );
-
-                            if (response != null &&
-                                response['status'] == 'success') {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const MainBottonNavbar()),
-                                  (route) => false);
-                            }
-                          }
-                        }),
+                    inProgress
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.green,
+                            ),
+                          )
+                        : AppElevatedButton(
+                            child:
+                                const Icon(Icons.arrow_circle_right_outlined),
+                            onTap: () async {
+                              if (_formKey.currentState!.validate()) {
+                                logIn();
+                              }
+                            }),
                     const SizedBox(
                       height: 36,
                     ),
                     Center(
                         child: TextButton(
                             style: TextButton.styleFrom(
-                                padding: EdgeInsets.zero, minimumSize: Size.zero),
+                                padding: EdgeInsets.zero,
+                                minimumSize: Size.zero),
                             onPressed: () {
                               Navigator.push(
                                   context,

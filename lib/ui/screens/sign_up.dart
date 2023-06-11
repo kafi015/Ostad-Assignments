@@ -25,7 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final bool isLoading = false;
+  bool inProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -117,13 +117,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    AppElevatedButton(
-                        child: const Icon(Icons.arrow_circle_right_outlined),
-                        onTap: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final result = await NetworkUtils().postMethod(
-                                Urls.registrationUrl,
-                                body: {
+                    inProgress
+                        ? Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.green,
+                            ),
+                          )
+                        : AppElevatedButton(
+                            child:
+                                const Icon(Icons.arrow_circle_right_outlined),
+                            onTap: () async {
+                              if (_formKey.currentState!.validate()) {
+                                inProgress = true;
+                                setState(() {});
+                                final result = await NetworkUtils()
+                                    .postMethod(Urls.registrationUrl, body: {
                                   'email': emailETcontroller.text.trim(),
                                   'mobile': mobileETcontroller.text.trim(),
                                   'password': passETcontroller.text,
@@ -131,19 +139,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       firstNameETcontroller.text.trim(),
                                   'lastName': lastNameETcontroller.text.trim(),
                                 });
-                            if (result != null &&
-                                result['status'] == 'success') {
-                              emailETcontroller.clear();
-                              firstNameETcontroller.clear();
-                              lastNameETcontroller.clear();
-                              mobileETcontroller.clear();
-                              passETcontroller.clear();
-                              showSnackBarMessage(context, "Registration successful!");
-                            } else {
-                              showSnackBarMessage(context, "Registration failed! Try again.",true);
-                            }
-                          }
-                        }),
+                                inProgress = false;
+                                setState(() {});
+                                if (result != null &&
+                                    result['status'] == 'success') {
+                                  emailETcontroller.clear();
+                                  firstNameETcontroller.clear();
+                                  lastNameETcontroller.clear();
+                                  mobileETcontroller.clear();
+                                  passETcontroller.clear();
+                                  showSnackBarMessage(
+                                      context, "Registration successful!");
+                                } else {
+                                  showSnackBarMessage(context,
+                                      "Registration failed! Try again.", true);
+                                }
+                              }
+                            }),
                     const SizedBox(
                       height: 24,
                     ),

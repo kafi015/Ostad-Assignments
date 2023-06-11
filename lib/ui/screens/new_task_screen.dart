@@ -9,6 +9,7 @@ import 'package:task_manager/ui/widgets/screen_background.dart';
 import 'package:task_manager/ui/widgets/task_single_item.dart';
 
 import '../../Data/urls.dart';
+import '../widgets/status_change_bottom_sheet.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({Key? key}) : super(key: key);
@@ -49,49 +50,68 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   @override
   Widget build(BuildContext context) {
     return ScreenBackground(
-      child: Column(
-        children: [
-          const Row(
-            children: [
-              Expanded(
-                  child: DashBoardItem(
-                numberofTask: 10,
-                typeofTask: "New",
-              )),
-              Expanded(
-                  child: DashBoardItem(
-                numberofTask: 11,
-                typeofTask: "Completed",
-              )),
-              Expanded(
-                  child: DashBoardItem(
-                numberofTask: 12,
-                typeofTask: "Cancel",
-              )),
-              Expanded(
-                  child: DashBoardItem(
-                numberofTask: 13,
-                typeofTask: "In Progress",
-              )),
-            ],
-          ),
-          Expanded(
-              child: ListView.builder(
-                  itemCount: newTaskModel.data!.length,
-                  itemBuilder: (context, index) {
-                    return TaskSingleItem(
-                      onEditPress: () {},
-                      onDeletePress: () {},
-                      subject: newTaskModel.data![index].title ?? 'Unknown',
-                      description:
-                          newTaskModel.data![index].description ?? 'Unknown',
-                      date: newTaskModel.data![index].createdDate ?? 'Unknown',
-                      type: newTaskModel.data![index].status ?? 'Unknown',
-                      chipColour: Colors.blue,
-                    );
-                  })),
-        ],
+      child: RefreshIndicator(
+        color: Colors.green,
+        onRefresh: () async {
+          await getAllNewTask();
+        },
+        child: Column(
+          children: [
+            const Row(
+              children: [
+                Expanded(
+                    child: DashBoardItem(
+                  numberofTask: 10,
+                  typeofTask: "New",
+                )),
+                Expanded(
+                    child: DashBoardItem(
+                  numberofTask: 11,
+                  typeofTask: "Completed",
+                )),
+                Expanded(
+                    child: DashBoardItem(
+                  numberofTask: 12,
+                  typeofTask: "Cancel",
+                )),
+                Expanded(
+                    child: DashBoardItem(
+                  numberofTask: 13,
+                  typeofTask: "In Progress",
+                )),
+              ],
+            ),
+            Expanded(
+                child: inProgress
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          color: Colors.green,
+                        ),
+                      )
+                    : ListView.builder(
+                        itemCount: newTaskModel.data!.length,
+                        itemBuilder: (context, index) {
+                          return TaskSingleItem(
+                            onEditPress: () {
+                              showChangeTaskStatus(newTaskModel.data![index].status ?? '',newTaskModel.data![index].sId ?? '',()=>getAllNewTask());
+                            },
+                            onDeletePress: () {},
+                            subject:
+                                newTaskModel.data![index].title ?? 'Unknown',
+                            description:
+                                newTaskModel.data![index].description ??
+                                    'Unknown',
+                            date: newTaskModel.data![index].createdDate ??
+                                'Unknown',
+                            type: newTaskModel.data![index].status ?? 'Unknown',
+                            chipColour: Colors.blue,
+                          );
+                        })),
+          ],
+        ),
       ),
     );
   }
+
+
 }

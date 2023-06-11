@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:task_manager/Data/Models/task_model.dart';
+import 'package:task_manager/Data/auth_utils.dart';
+import 'package:task_manager/Data/network_utils.dart';
+import 'package:task_manager/main.dart';
+import 'package:task_manager/ui/utils/snackbar_message.dart';
 import 'package:task_manager/ui/widgets/dashboard_item.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 import 'package:task_manager/ui/widgets/task_single_item.dart';
 
+import '../../Data/urls.dart';
 
 class NewTaskScreen extends StatefulWidget {
   const NewTaskScreen({Key? key}) : super(key: key);
@@ -12,6 +18,8 @@ class NewTaskScreen extends StatefulWidget {
 }
 
 class _NewTaskScreenState extends State<NewTaskScreen> {
+  TaskModel newTaskModel = TaskModel();
+
   @override
   void initState() {
     // TODO: implement initState
@@ -21,13 +29,21 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
 
   bool inProgress = false;
 
-  getAllNewTask() {
+  Future<void> getAllNewTask() async {
     inProgress = true;
     setState(() {});
+    final response = await NetworkUtils()
+        .getMethod(Urls.getNewTaskUrl, token: AuthUtils.token);
+
+    if (response != null) {
+      newTaskModel = TaskModel.fromJson(response);
+    } else {
+      showSnackBarMessage(MyApp.globalKey.currentContext!,
+          'Unable to fetch new task! Try again!');
+    }
 
     inProgress = false;
     setState(() {});
-
   }
 
   @override
@@ -61,16 +77,16 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
           ),
           Expanded(
               child: ListView.builder(
-                  itemCount: 15,
+                  itemCount: newTaskModel.data!.length,
                   itemBuilder: (context, index) {
                     return TaskSingleItem(
                       onEditPress: () {},
                       onDeletePress: () {},
-                      subject: "Title one",
+                      subject: newTaskModel.data![index].title ?? 'Unknown',
                       description:
-                          "the hmber you call ins not be reachedat the momemnt please try again ater thank you",
-                      date: "12/05/23",
-                      type: "New",
+                          newTaskModel.data![index].description ?? 'Unknown',
+                      date: newTaskModel.data![index].createdDate ?? 'Unknown',
+                      type: newTaskModel.data![index].status ?? 'Unknown',
                       chipColour: Colors.blue,
                     );
                   })),

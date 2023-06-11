@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/ui/screens/Cancel_task_screen.dart';
-import 'package:task_manager/ui/screens/Completed_task_screen.dart';
+import 'package:task_manager/ui/screens/cancel_task_screen.dart';
+import 'package:task_manager/ui/screens/completed_task_screen.dart';
 import 'package:task_manager/ui/screens/add_new_task.dart';
 import 'package:task_manager/ui/screens/in_progress_task_screen.dart';
 import 'package:task_manager/ui/screens/new_task_screen.dart';

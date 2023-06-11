@@ -9,6 +9,7 @@ import 'package:task_manager/ui/widgets/elevated_button.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
 import '../../Data/urls.dart';
+import '../../main.dart';
 import '../utils/snackbar_message.dart';
 import '../utils/text_styles.dart';
 import '../widgets/app_textfield_widget.dart';
@@ -51,7 +52,7 @@ class _LogInScreenState extends State<LogInScreen> {
       );
 
       Navigator.pushAndRemoveUntil(
-          context,
+          MyApp.globalKey.currentContext!,
           MaterialPageRoute(builder: (context) => const MainBottonNavbar()),
           (route) => false);
     }
@@ -76,7 +77,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     ),
                     Text(
                       "Get Started With",
-                      style: ScreenTitleTextStyle,
+                      style: screenTitleTextStyle,
                     ),
                     const SizedBox(
                       height: 24,

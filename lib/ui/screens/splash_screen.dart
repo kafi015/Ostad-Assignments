@@ -5,6 +5,8 @@ import 'package:task_manager/ui/screens/log_in_screen.dart';
 import 'package:task_manager/ui/screens/main_bottom_navbar.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
+import '../../main.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -27,12 +29,12 @@ class _SplashScreenState extends State<SplashScreen> {
     if (result) {
       AuthUtils.getAuthData();
       Navigator.pushAndRemoveUntil(
-          context,
+          MyApp.globalKey.currentContext!,
           MaterialPageRoute(builder: (context) => const MainBottonNavbar()),
           (route) => false);
     } else {
       Navigator.pushAndRemoveUntil(
-          context,
+          MyApp.globalKey.currentContext!,
           MaterialPageRoute(builder: (context) => const LogInScreen()),
           (route) => false);
     }

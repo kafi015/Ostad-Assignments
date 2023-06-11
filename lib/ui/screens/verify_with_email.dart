@@ -26,14 +26,14 @@ class _VerifyWithEmailState extends State<VerifyWithEmail> {
             children: [
               Text(
                 "Your Email Address",
-                style: ScreenTitleTextStyle,
+                style: screenTitleTextStyle,
               ),
               const SizedBox(
                 height: 16,
               ),
               Text(
                 "A 6 digit varification pin will send to your\nemail address",
-                style: ScreenSubtileTextStyle,
+                style: screenSubtileTextStyle,
               ),
               const SizedBox(
                 height: 24,

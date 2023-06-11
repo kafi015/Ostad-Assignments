@@ -27,14 +27,14 @@ class _OTPVarificationScreenState extends State<OTPVarificationScreen> {
             children: [
               Text(
                 "PIN Verification",
-                style: ScreenTitleTextStyle,
+                style: screenTitleTextStyle,
               ),
               const SizedBox(
                 height: 16,
               ),
               Text(
                 "A 6 digit varification pin will send to your\nemail address",
-                style: ScreenSubtileTextStyle,
+                style: screenSubtileTextStyle,
               ),
               const SizedBox(
                 height: 24,
@@ -78,7 +78,7 @@ class _OTPVarificationScreenState extends State<OTPVarificationScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SetPasswordScreen()));
+                            builder: (context) => const SetPasswordScreen()));
                   }),
               const SizedBox(
                 height: 24,

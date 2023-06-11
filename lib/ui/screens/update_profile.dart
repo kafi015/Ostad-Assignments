@@ -33,7 +33,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         ),
                         Text(
                           "Update Profile",
-                          style: ScreenTitleTextStyle,
+                          style: screenTitleTextStyle,
                         ),
                         const SizedBox(
                           height: 25,

@@ -27,14 +27,14 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
             children: [
               Text(
                 "Set Password",
-                style: ScreenTitleTextStyle,
+                style: screenTitleTextStyle,
               ),
               const SizedBox(
                 height: 16,
               ),
               Text(
                 "Minimum length password 8 character with\nLetter and number combination",
-                style: ScreenSubtileTextStyle,
+                style: screenSubtileTextStyle,
               ),
               const SizedBox(
                 height: 24,

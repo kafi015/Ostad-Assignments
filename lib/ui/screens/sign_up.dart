@@ -8,6 +8,7 @@ import 'package:task_manager/ui/widgets/elevated_button.dart';
 import 'package:task_manager/ui/widgets/screen_background.dart';
 
 import '../../Data/urls.dart';
+import '../../main.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -46,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     Text(
                       "Join With Us",
-                      style: ScreenTitleTextStyle,
+                      style: screenTitleTextStyle,
                     ),
                     const SizedBox(
                       height: 24,
@@ -118,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 16,
                     ),
                     inProgress
-                        ? Center(
+                        ? const Center(
                             child: CircularProgressIndicator(
                               color: Colors.green,
                             ),
@@ -149,9 +150,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   mobileETcontroller.clear();
                                   passETcontroller.clear();
                                   showSnackBarMessage(
-                                      context, "Registration successful!");
+                                      MyApp.globalKey.currentContext!, "Registration successful!");
                                 } else {
-                                  showSnackBarMessage(context,
+                                  showSnackBarMessage(MyApp.globalKey.currentContext!,
                                       "Registration failed! Try again.", true);
                                 }
                               }

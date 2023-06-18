@@ -48,7 +48,7 @@ class _LogInScreenState extends State<LogInScreen> {
           response['token'],
           response['data']['photo'],
           response['data']['mobile'],
-          response['data']['email']
+          response['data']['email'],
       );
 
       Navigator.pushAndRemoveUntil(

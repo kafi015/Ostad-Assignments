@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthUtils {
-  static String? firstName, lastName, token, profilePic, mobile, email;
+  static String? firstName, lastName, token, profilePic, mobile, email, pass;
 
   static Future<void> saveUserData(String fName, String lName, String uToken,
       String uProfilePic, String uMobile, String uEmail) async {
@@ -19,6 +19,7 @@ class AuthUtils {
     profilePic = uProfilePic;
     mobile = uMobile;
     email = uEmail;
+
   }
 
   static Future<bool> checkLoginState() async {
